@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FASTPinballTestPlayground", "FASTPinballTestPlayground\FASTPinballTestPlayground.vbproj", "{1A590E8E-C7BA-4167-AF9A-72771EE1643B}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FASTHardware", "FASTHardware\FASTHardware.vbproj", "{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A590E8E-C7BA-4167-AF9A-72771EE1643B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A590E8E-C7BA-4167-AF9A-72771EE1643B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A590E8E-C7BA-4167-AF9A-72771EE1643B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A590E8E-C7BA-4167-AF9A-72771EE1643B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
