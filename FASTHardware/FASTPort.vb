@@ -6,6 +6,7 @@ Public MustInherit Class FASTPort
         Unknown = 0
         NET
         RGB
+        DMD
     End Enum
 
 #Region "Properties"
@@ -16,6 +17,8 @@ Public MustInherit Class FASTPort
                     Return "FAST NET Controller"
                 Case eFASTPortType.RGB
                     Return "FAST RGB Controller"
+                Case eFASTPortType.DMD
+                    Return "FAST DMD Controller"
                 Case Else
                     Return _RawIDString
             End Select

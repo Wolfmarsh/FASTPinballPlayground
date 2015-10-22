@@ -12,6 +12,7 @@ Public Class MainForm
     Private Sub btn_port_autoconfig_Click(sender As Object, e As EventArgs) Handles btn_port_autoconfig.Click
         Try
             _FAST.AutoConfigurePorts()
+            DisplayHardwareControls(True)
         Catch ex As Exception
             If ex.Message = "No Serial Ports Found On This Computer" Then
                 MsgBox("No Serial Ports Were Found On This Computer", MsgBoxStyle.OkOnly, "No Ports Found")
@@ -85,13 +86,13 @@ Public Class MainForm
     End Sub
 
     Private Sub tc_areas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tc_areas.SelectedIndexChanged
-        If tc_areas.SelectedTab.Text = "Switches" Then
-            _FAST.NET.StartListener()
-        Else
-            _FAST.NET.StopListener()
+        If IsNothing(_FAST.NET) = False Then 'Make sure object is initialized
+            If tc_areas.SelectedTab.Text = "Switches" Then
+                _FAST.NET.StartListener()
+            Else
+                _FAST.NET.StopListener()
+            End If
         End If
-
-        'MsgBox(tc_areas.SelectedTab.Text)
 
     End Sub
 
@@ -106,5 +107,16 @@ Public Class MainForm
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.Text = Me.Text & " - " & Application.ProductVersion
+        DisplayHardwareControls(False)
+    End Sub
+
+    Private Sub DisplayHardwareControls(ByVal isHardwareDetected As Boolean)
+        Label3.Visible = isHardwareDetected
+        Label4.Visible = isHardwareDetected
+        Label4.Visible = isHardwareDetected
+        Label5.Visible = isHardwareDetected
+        dg_hardware_ports.Visible = isHardwareDetected
+        dg_hardware_nodes.Visible = isHardwareDetected
+        lbl_hardware_networkswitchcount.Visible = isHardwareDetected
     End Sub
 End Class

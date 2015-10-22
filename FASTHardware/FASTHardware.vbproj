@@ -63,6 +63,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FASTDMDPort.vb" />
     <Compile Include="FASTHardware.vb" />
     <Compile Include="FASTMessage.vb" />
     <Compile Include="FASTNETPort.vb" />

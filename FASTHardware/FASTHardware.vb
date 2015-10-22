@@ -8,6 +8,7 @@ Public Class FASTHardware
 
     Private WithEvents _RGBPort As FASTRGBPort
     Private WithEvents _NETPort As FASTNETPort
+    Private WithEvents _DMDPort As FASTDMDPort
 
     Public ReadOnly Property HasNET As Boolean
         Get
@@ -22,6 +23,22 @@ Public Class FASTHardware
     Public ReadOnly Property NET As FASTNETPort
         Get
             Return _NETPort
+        End Get
+    End Property
+
+    Public ReadOnly Property HasDMD As Boolean
+        Get
+            If _DMDPort IsNot Nothing Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property DMD As FASTDMDPort
+        Get
+            Return _DMDPort
         End Get
     End Property
 
@@ -49,6 +66,9 @@ Public Class FASTHardware
             End If
             If _RGBPort IsNot Nothing Then
                 _Ports.Add(_RGBPort)
+            End If
+            If _DMDPort IsNot Nothing Then
+                _Ports.Add(_DMDPort)
             End If
             Return _Ports
         End Get
@@ -90,6 +110,13 @@ Public Class FASTHardware
                     _NewPort.Port = _TempPort
                     _NewPort.RawIDString = _ReturnValue
                     _NETPort = _NewPort
+                ElseIf _ReturnValue.StartsWith("ID:DMD FP-CPU") Then
+                    Dim _NewPort As New FASTDMDPort
+                    _NewPort.Port = _TempPort
+                    _NewPort.RawIDString = _ReturnValue
+                    _DMDPort = _NewPort
+                Else
+                    MsgBox(_ReturnValue.ToString(), MsgBoxStyle.MsgBoxRight, "Unknown CPU Detected")
                 End If
             Catch ex As Exception
                 'FUCK YO COUCH
