@@ -24,7 +24,11 @@
             _Node = _Parts(0)
             _NodeName = _Parts(1)
             _Version = _Parts(2)
-            _SW = _Parts(3)
+            Try
+                _SW = Convert.ToInt32(_Parts(3), 16)
+            Catch ex As Exception
+                _SW = _Parts(3)
+            End Try
             _DR = _Parts(4)
             _XI = _Parts(5)
             _XO = _Parts(6)
