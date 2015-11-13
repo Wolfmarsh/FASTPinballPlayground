@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FASTDMDPort.vb" />
+    <Compile Include="FASTDriver.vb" />
     <Compile Include="FASTHardware.vb" />
     <Compile Include="FASTMessage.vb" />
     <Compile Include="FASTNETPort.vb" />

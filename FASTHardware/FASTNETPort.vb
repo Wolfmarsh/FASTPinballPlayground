@@ -12,12 +12,14 @@
     Public Property NetworkSwitchCount As Integer
     Public Property Nodes As List(Of FASTNode)
     Public Property Switches As List(Of FASTSwitch)
+    Public Property Drivers As List(Of FASTDriver)
 
     Public Sub New()
         MyBase.New()
 
         _Nodes = New List(Of FASTNode)
         _Switches = New List(Of FASTSwitch)
+        _Drivers = New List(Of FASTDriver)
     End Sub
 
     Public Sub DiscoverNodes()
@@ -30,6 +32,21 @@
                 Dim _NewNode As New FASTNode
                 _NewNode.RawConfigLine = _Line
                 _Nodes.Add(_NewNode)
+            End If
+        Next
+    End Sub
+
+    Public Sub DiscoverDrivers()
+        _Drivers.Clear()
+        Dim _RawNodeConfig As String = SendRawMessage("CD:")
+
+        Dim _Lines() As String = _RawNodeConfig.Split(vbCrLf)
+
+        For Each _Line As String In _Lines
+            If _Line.StartsWith("DN:") Then
+                Dim _NewDriver As New FASTDriver
+                _NewDriver.RawConfigLine = _Line
+                _Drivers.Add(_NewDriver)
             End If
         Next
     End Sub
