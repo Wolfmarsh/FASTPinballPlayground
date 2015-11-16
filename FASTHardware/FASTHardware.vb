@@ -10,6 +10,8 @@ Public Class FASTHardware
     Private WithEvents _NETPort As FASTNETPort
     Private WithEvents _DMDPort As FASTDMDPort
 
+    Public Const TimeoutError = -2146233083
+
     Public ReadOnly Property HasNET As Boolean
         Get
             If _NETPort IsNot Nothing Then
@@ -119,7 +121,9 @@ Public Class FASTHardware
                     MsgBox(_ReturnValue.ToString(), MsgBoxStyle.MsgBoxRight, "Unknown CPU Detected")
                 End If
             Catch ex As Exception
-                'FUCK YO COUCH
+                If ex.HResult <> TimeoutError Then
+                    MsgBox(ex.Message, vbOKOnly, "Error")
+                End If
             Finally
                 If _TempPort IsNot Nothing Then
                     If _TempPort.IsOpen Then
@@ -135,6 +139,9 @@ Public Class FASTHardware
 
             'Figure out the switch counts
             _NETPort.DiscoverSwitches()
+
+            'Fetch Driver Information
+            _NETPort.DiscoverDrivers()
         End If
 
         RaiseEvent HardwareChanged()

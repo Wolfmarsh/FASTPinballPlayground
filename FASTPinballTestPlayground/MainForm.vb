@@ -31,15 +31,19 @@ Public Class MainForm
     End Sub
 
     Private Sub btn_rgb_setallleds_Click(sender As Object, e As EventArgs) Handles btn_rgb_setallleds.Click
-        _FAST.RGB.SetAllRGBLEDs(pnl_color.BackColor)
+        If _FAST.HasRGB Then
+            _FAST.RGB.SetAllRGBLEDs(pnl_color.BackColor)
+        End If
     End Sub
 
     Private Sub btn_rgb_fadeallleds_Click(sender As Object, e As EventArgs) Handles btn_rgb_fadeallleds.Click
-        Dim _FadeAnimation As New RGBAnimation
-        _FadeAnimation.AddFrames(RGBAnimation.GenerateAllLEDFade(System.Drawing.Color.Black, pnl_color.BackColor, 500))
-        _FadeAnimation.AddFrames(RGBAnimation.GenerateAllLEDFade(pnl_color.BackColor, System.Drawing.Color.Black, 500))
-        _FadeAnimation.Repeat = True
-        _FAST.RGB.PlayRGBAnimation(_FadeAnimation)
+        If _FAST.HasRGB Then
+            Dim _FadeAnimation As New RGBAnimation
+            _FadeAnimation.AddFrames(RGBAnimation.GenerateAllLEDFade(System.Drawing.Color.Black, pnl_color.BackColor, 500))
+            _FadeAnimation.AddFrames(RGBAnimation.GenerateAllLEDFade(pnl_color.BackColor, System.Drawing.Color.Black, 500))
+            _FadeAnimation.Repeat = True
+            _FAST.RGB.PlayRGBAnimation(_FadeAnimation)
+        End If
     End Sub
 
     Public Sub GUISwitchChangeHandler(sender As FASTSwitch, e As FASTSwitchStateChangedArgs)
@@ -63,26 +67,32 @@ Public Class MainForm
     End Function
 
     Private Sub _FAST_HardwareChanged() Handles _FAST.HardwareChanged
+
         dg_hardware_ports.DataSource = Nothing
         dg_hardware_ports.AutoGenerateColumns = False
         dg_hardware_ports.DataSource = _FAST.Ports
 
         cb_terminal_port.DataSource = _FAST.Ports
 
-        dg_hardware_nodes.DataSource = Nothing
-        dg_hardware_nodes.AutoGenerateColumns = False
-        dg_hardware_nodes.DataSource = _FAST.NET.Nodes
+        If _FAST.HasNET Then
+            dg_hardware_nodes.DataSource = Nothing
+            dg_hardware_nodes.AutoGenerateColumns = False
+            dg_hardware_nodes.DataSource = _FAST.NET.Nodes
 
-        lbl_hardware_networkswitchcount.Text = _FAST.NET.NetworkSwitchCount
+            lbl_hardware_networkswitchcount.Text = _FAST.NET.NetworkSwitchCount
 
-        dg_switches_switchlist.DataSource = Nothing
-        dg_switches_switchlist.AutoGenerateColumns = False
-        dg_switches_switchlist.DataSource = _FAST.NET.Switches
+            dg_switches_switchlist.DataSource = Nothing
+            dg_switches_switchlist.AutoGenerateColumns = False
+            dg_switches_switchlist.DataSource = _FAST.NET.Switches
+
+            lst_Drivers.DataSource = Nothing
+            lst_Drivers.DataSource = _FAST.NET.Drivers
+        End If
+
     End Sub
 
     Private Sub btn_terminal_sendcustom_Click(sender As Object, e As EventArgs) Handles btn_terminal_sendcustom.Click
-        Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage(txt_terminal_command.Text)
-        txt_terminal_console.Text = _Return.Replace(vbCr, vbCrLf)
+        SendTerminalCommand(txt_terminal_command.Text)
     End Sub
 
     Private Sub tc_areas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tc_areas.SelectedIndexChanged
@@ -102,7 +112,9 @@ Public Class MainForm
     End Sub
 
     Private Sub btn_rgb_stopfadeall_Click(sender As Object, e As EventArgs) Handles btn_rgb_stopfadeall.Click
-        _FAST.RGB.StopAllAnimations()
+        If _FAST.HasRGB Then
+            _FAST.RGB.StopAllAnimations()
+        End If
     End Sub
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -119,4 +131,57 @@ Public Class MainForm
         dg_hardware_nodes.Visible = isHardwareDetected
         lbl_hardware_networkswitchcount.Visible = isHardwareDetected
     End Sub
-End Class
+
+    Private Sub dg_switches_switchlist_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dg_switches_switchlist.CellContentClick
+
+    End Sub
+
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
+
+    End Sub
+
+    Private Sub txt_terminal_command_TextChanged(sender As Object, e As EventArgs) Handles txt_terminal_command.TextChanged
+
+    End Sub
+
+    Private Sub txt_terminal_command_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt_terminal_command.KeyPress
+        If e.KeyChar = vbCr Then
+            SendTerminalCommand(txt_terminal_command.Text)
+        End If
+    End Sub
+
+    Private Sub SendTerminalCommand(terminalCommand As String)
+        If _FAST.HasNET Then
+            Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage(terminalCommand)
+            txt_terminal_console.Text = _Return.Replace(vbCr, vbCrLf)
+        End If
+    End Sub
+
+
+
+    Private Sub lst_Drivers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lst_Drivers.SelectedIndexChanged
+        Dim DriverName As String
+        DriverName = lst_Drivers.Text()
+        _FAST.NET.DiscoverDrivers() 'Refresh
+        Dim f As New FASTDriver
+        f = _FAST.NET.Drivers.Find(Function(p) p.ID = DriverName)
+        BindListView(f)
+    End Sub
+
+    Private Sub BindListView(singleDriver As FASTDriver)
+        Dim lvi As ListViewItem
+        lv_DriverInformation.Items.Clear()
+
+
+        For Each p As System.Reflection.PropertyInfo In singleDriver.GetType().GetProperties()
+            If p.CanRead Then
+                lvi = lv_DriverInformation.Items.Add(p.Name)
+                lvi.SubItems.Add(p.GetValue(singleDriver, Nothing))
+            End If
+        Next
+    End Sub
+
+    Private Sub btn_ExecuteDriver_Click(sender As Object, e As EventArgs) Handles btn_ExecuteDriver.Click
+        SendTerminalCommand(lst_Drivers.Text() & ",01,00,10,14,FF,00,00,50")
+    End Sub
+'End Class
