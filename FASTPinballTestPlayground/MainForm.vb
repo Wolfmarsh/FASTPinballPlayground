@@ -184,4 +184,4 @@ Public Class MainForm
     Private Sub btn_ExecuteDriver_Click(sender As Object, e As EventArgs) Handles btn_ExecuteDriver.Click
         SendTerminalCommand(lst_Drivers.Text() & ",01,00,10,14,FF,00,00,50")
     End Sub
-'End Class
+End Class

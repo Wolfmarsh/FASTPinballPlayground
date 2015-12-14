@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="WelcomeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FASTPlaygroundWPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="{DynamicResource WindowBackgroundBrush}">
+    <Control.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Control.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="101*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="label" Content="Welcome!" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Style="{DynamicResource WindowH1Font}"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="25,25,25,25" Grid.Row="1" TextWrapping="Wrap" Text="Using this playground, you can do some general testing and experimenting with your FAST hardware.  Start by clicking the &quot;Hardware&quot; button at the top to locate and configure your hardware." VerticalAlignment="Center" Style="{DynamicResource WindowDefaultFont}"/>
+    </Grid>
+</UserControl>

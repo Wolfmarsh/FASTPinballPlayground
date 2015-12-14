@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FASTPinballTestPlayground", "FASTPinballTestPlayground\FASTPinballTestPlayground.vbproj", "{1A590E8E-C7BA-4167-AF9A-72771EE1643B}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FASTHardware", "FASTHardware\FASTHardware.vbproj", "{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FASTPinballWPFPlayground", "FASTPinballWPFPlayground\FASTPinballWPFPlayground.vbproj", "{F68E67BD-FCBC-48D1-8DEE-EB51115750C6}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FASTPlaygroundWPF", "FASTPlaygroundWPF\FASTPlaygroundWPF.vbproj", "{06716E18-129D-4878-A4F7-F87A611EFC31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8772EDF-62F0-4D03-9F13-BA1E4A1C5B92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F68E67BD-FCBC-48D1-8DEE-EB51115750C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F68E67BD-FCBC-48D1-8DEE-EB51115750C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F68E67BD-FCBC-48D1-8DEE-EB51115750C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F68E67BD-FCBC-48D1-8DEE-EB51115750C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06716E18-129D-4878-A4F7-F87A611EFC31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06716E18-129D-4878-A4F7-F87A611EFC31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06716E18-129D-4878-A4F7-F87A611EFC31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06716E18-129D-4878-A4F7-F87A611EFC31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

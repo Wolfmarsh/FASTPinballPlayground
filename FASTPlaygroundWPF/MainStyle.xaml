@@ -1,0 +1,72 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:FASTPlaygroundWPF">
+
+    <!--Window Colors-->
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="Black"/>
+    <SolidColorBrush x:Key="WindowMainFontColorBrush" Color="White" />
+    
+    <!--Window Fonts-->
+    <Style x:Key="WindowH1Font">
+        <Setter Property="Control.FontFamily" Value="Arial" />
+        <Setter Property="Control.FontSize" Value="24" />
+        <Setter Property="Control.Foreground" Value="{StaticResource WindowMainFontColorBrush}" />
+    </Style>
+
+    <Style x:Key="WindowDefaultFont">
+        <Setter Property="Control.FontFamily" Value="Arial" />
+        <Setter Property="Control.FontSize" Value="16" />
+        <Setter Property="Control.Foreground" Value="{StaticResource WindowMainFontColorBrush}" />
+    </Style>
+
+    <Style x:Key="WindowSmallFont">
+        <Setter Property="Control.FontFamily" Value="Arial" />
+        <Setter Property="Control.FontSize" Value="12" />
+        <Setter Property="Control.Foreground" Value="{StaticResource WindowMainFontColorBrush}" />
+    </Style>
+    
+    <!--Main Menu Button Style-->
+    <LinearGradientBrush x:Key="MainMenuButtonBackgroundGradient">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="Gray" Offset="1" />
+    </LinearGradientBrush>
+
+    <OuterGlowBitmapEffect x:Key="MainMenuButtonTextGlow" GlowColor="Black" GlowSize="3" />
+    
+    <Style x:Key="MainMenuButton">
+        <Setter Property="Control.Background" Value="{StaticResource MainMenuButtonBackgroundGradient}" />
+        <Setter Property="Control.Margin" Value="10,0,10,0" />
+        <Style.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{StaticResource WindowMainFontColorBrush}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    <!--Standard Button Style-->
+    <LinearGradientBrush x:Key="StandardButtonBackgroundGradient" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="Gray" Offset="1" />
+    </LinearGradientBrush>
+
+    <Style x:Key="StandardButton">
+        <Setter Property="Control.Background" Value="{StaticResource StandardButtonBackgroundGradient}" />
+    </Style>
+
+
+    <!--Terminal Window Style-->
+    <SolidColorBrush x:Key="TerminalWindowBackgroundBrush" Color="#FF454545"/>
+    <SolidColorBrush x:Key="TerminalWindowForegroundBrush" Color="#FF00C911"/>
+    <SolidColorBrush x:Key="TerminalWindowBorderBrush" Color="White"/>
+
+    <Style x:Key="TerminalWindow">
+        <Setter Property="Control.Background" Value="{StaticResource TerminalWindowBackgroundBrush}" />
+        <Setter Property="Control.Foreground" Value="{StaticResource TerminalWindowForegroundBrush}" />
+        <Setter Property="Control.FontFamily" Value="Courier" />
+        <Setter Property="Control.FontSize" Value="14" />
+        <Setter Property="Control.BorderBrush" Value="{StaticResource TerminalWindowBorderBrush}" />
+    </Style>
+
+</ResourceDictionary>

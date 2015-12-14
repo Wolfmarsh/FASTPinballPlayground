@@ -1,0 +1,76 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FASTPlaygroundWPF"
+        mc:Ignorable="d"
+        Title="FAST Pinball Playground" Height="600" Width="901.25"
+        Background="{DynamicResource WindowBackgroundBrush}" WindowStartupLocation="CenterScreen" MinWidth="900" Icon="playground.ico">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="93*" MinHeight="80"/>
+            <RowDefinition Height="100*" MinHeight="110" MaxHeight="110"/>
+            <RowDefinition Height="350*"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="76" Margin="10,7,0,0" VerticalAlignment="Top" Width="175" Source="Images/fastlogo.png" Stretch="UniformToFill"/>
+        <Label x:Name="label" Content="Hardware Test Playground" HorizontalAlignment="Left" Margin="212,19,0,0" VerticalAlignment="Top" Width="347" Style="{DynamicResource WindowH1Font}"/>
+        <Label x:Name="label1" Content="Written by Chris Benn &amp; John Marsh" HorizontalAlignment="Left" Margin="212,57,0,0" VerticalAlignment="Top" Style="{DynamicResource WindowSmallFont}"/>
+        <Border Grid.Row="1" BorderBrush="White" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8">
+            <StackPanel x:Name="stp_menubar" HorizontalAlignment="Center" Height="105" Margin="0,0,0,0" VerticalAlignment="Top" Orientation="Horizontal">
+                <Button x:Name="btn_hardware" Height="100" Width="100" Style="{DynamicResource MainMenuButton}">
+                    <StackPanel>
+                        <Image Source="Images/hardwareicon.png" Height="75" Width="75" />
+                        <TextBlock>Hardware</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_terminal" Height="100" Width="100" Style="{DynamicResource MainMenuButton}">
+                    <StackPanel>
+                        <Image Source="Images/terminalicon.png" Height="75" Width="75" />
+                        <TextBlock>Terminal</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_led" Height="100" Width="100" Style="{DynamicResource MainMenuButton}">
+                    <StackPanel>
+                        <Image Source="Images/ledicon.png" Height="75" Width="75" />
+                        <TextBlock>Lights</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_switches" Height="100" Width="100" Style="{DynamicResource MainMenuButton}">
+                    <StackPanel>
+                        <Image Source="Images/switchicon.png" Height="75" Width="75" />
+                        <TextBlock>Switches</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_coils" Height="100" Width="100" Style="{DynamicResource MainMenuButton}">
+                    <StackPanel>
+                        <Image Source="Images/coilicon.png" Height="75" Width="75" />
+                        <TextBlock>Coils</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_dmd" Height="100" Width="100" Style="{DynamicResource MainMenuButton}">
+                    <StackPanel>
+                        <Image Source="Images/dmdicon.png" Height="75" Width="75" />
+                        <TextBlock>DMD</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_help" Height="100" Width="100" Style="{DynamicResource MainMenuButton}">
+                    <StackPanel>
+                        <Image Source="Images/helpicon.png" Height="75" Width="75" />
+                        <TextBlock>Help</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2" BorderBrush="White" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8">
+            <DockPanel Margin="3,3,3,3" x:Name="dp_content" Background="{DynamicResource WindowBackgroundBrush}"/>
+        </Border>
+    </Grid>
+</Window>
