@@ -82,12 +82,13 @@
     Public Overrides Sub ProcessMessage(LineToProcess As String)
         Try
             Dim _LineParts() As String = LineToProcess.Split(":")
-            Dim _SwitchNumber As Integer = Convert.ToInt32(_LineParts(1), 16)
+            'Dim _SwitchNumber As Integer = Convert.ToInt32(_LineParts(1), 16)
+            Dim _SwitchNumber As Integer = _LineParts(1)
             Select Case _LineParts(0)
                 Case "-N"
-                    _Switches.Item(_SwitchNumber).Closed = True
+                    _Switches.Item(Convert.ToInt32(_LineParts(1), 16)).Closed = True
                 Case "/N"
-                    _Switches.Item(_SwitchNumber).Closed = False
+                    _Switches.Item(Convert.ToInt32(_LineParts(1), 16)).Closed = False
                 Case Else
                     MsgBox("Unrecognized Message" & vbCrLf & """" & LineToProcess & """")
             End Select

@@ -184,4 +184,17 @@ Public Class MainForm
     Private Sub btn_ExecuteDriver_Click(sender As Object, e As EventArgs) Handles btn_ExecuteDriver.Click
         SendTerminalCommand(lst_Drivers.Text() & ",01,00,10,14,FF,00,00,50")
     End Sub
+
+    Private Sub btn_SetLED_Click(sender As Object, e As EventArgs) Handles btn_SetLED.Click
+        If _FAST.HasRGB Then
+            _FAST.RGB.SetRGBLED(num_LEDNumber.Value, pnl_color2.BackColor)
+        End If
+    End Sub
+
+    Private Sub btn_rgb_changecolor2_Click(sender As Object, e As EventArgs) Handles btn_rgb_changecolor2.Click
+        Dim _ColorForm As New ColorDialog
+        _ColorForm.Color = pnl_color2.BackColor
+        _ColorForm.ShowDialog()
+        pnl_color2.BackColor = _ColorForm.Color
+    End Sub
 End Class

@@ -56,6 +56,9 @@ Partial Class MainForm
         Me.lbl_Terminal_CMD = New System.Windows.Forms.Label()
         Me.txt_terminal_command = New System.Windows.Forms.TextBox()
         Me.tp_rgbleds = New System.Windows.Forms.TabPage()
+        Me.btn_SetLED = New System.Windows.Forms.Button()
+        Me.num_LEDNumber = New System.Windows.Forms.NumericUpDown()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.btn_rgb_stopfadeall = New System.Windows.Forms.Button()
         Me.btn_rgb_fadeallleds = New System.Windows.Forms.Button()
         Me.btn_rgb_setallleds = New System.Windows.Forms.Button()
@@ -69,12 +72,14 @@ Partial Class MainForm
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txt_switches_activity = New System.Windows.Forms.TextBox()
         Me.tp_drivers = New System.Windows.Forms.TabPage()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.lv_DriverInformation = New System.Windows.Forms.ListView()
         Me.Attribute = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Value = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btn_ExecuteDriver = New System.Windows.Forms.Button()
         Me.lst_Drivers = New System.Windows.Forms.ListBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnl_color2 = New System.Windows.Forms.Panel()
+        Me.btn_rgb_changecolor2 = New System.Windows.Forms.Button()
         Me.tc_areas.SuspendLayout()
         Me.tp_hardware.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -84,6 +89,7 @@ Partial Class MainForm
         Me.tp_terminal.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.tp_rgbleds.SuspendLayout()
+        CType(Me.num_LEDNumber, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_switches.SuspendLayout()
         CType(Me.dg_switches_switchlist, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_drivers.SuspendLayout()
@@ -398,6 +404,11 @@ Partial Class MainForm
         '
         'tp_rgbleds
         '
+        Me.tp_rgbleds.Controls.Add(Me.btn_rgb_changecolor2)
+        Me.tp_rgbleds.Controls.Add(Me.pnl_color2)
+        Me.tp_rgbleds.Controls.Add(Me.btn_SetLED)
+        Me.tp_rgbleds.Controls.Add(Me.num_LEDNumber)
+        Me.tp_rgbleds.Controls.Add(Me.Label8)
         Me.tp_rgbleds.Controls.Add(Me.btn_rgb_stopfadeall)
         Me.tp_rgbleds.Controls.Add(Me.btn_rgb_fadeallleds)
         Me.tp_rgbleds.Controls.Add(Me.btn_rgb_setallleds)
@@ -409,6 +420,31 @@ Partial Class MainForm
         Me.tp_rgbleds.TabIndex = 0
         Me.tp_rgbleds.Text = "RGB LEDs"
         Me.tp_rgbleds.UseVisualStyleBackColor = True
+        '
+        'btn_SetLED
+        '
+        Me.btn_SetLED.Location = New System.Drawing.Point(380, 160)
+        Me.btn_SetLED.Name = "btn_SetLED"
+        Me.btn_SetLED.Size = New System.Drawing.Size(181, 34)
+        Me.btn_SetLED.TabIndex = 7
+        Me.btn_SetLED.Text = "Set Above LED This Color"
+        Me.btn_SetLED.UseVisualStyleBackColor = True
+        '
+        'num_LEDNumber
+        '
+        Me.num_LEDNumber.Location = New System.Drawing.Point(454, 125)
+        Me.num_LEDNumber.Name = "num_LEDNumber"
+        Me.num_LEDNumber.Size = New System.Drawing.Size(107, 20)
+        Me.num_LEDNumber.TabIndex = 6
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(377, 127)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(71, 13)
+        Me.Label8.TabIndex = 5
+        Me.Label8.Text = "LED Number:"
         '
         'btn_rgb_stopfadeall
         '
@@ -538,6 +574,15 @@ Partial Class MainForm
         Me.tp_drivers.Text = "Drivers"
         Me.tp_drivers.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(13, 22)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(43, 13)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Drivers:"
+        '
         'lv_DriverInformation
         '
         Me.lv_DriverInformation.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Attribute, Me.Value})
@@ -576,14 +621,22 @@ Partial Class MainForm
         Me.lst_Drivers.Size = New System.Drawing.Size(205, 433)
         Me.lst_Drivers.TabIndex = 0
         '
-        'Label1
+        'pnl_color2
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 22)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(43, 13)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "Drivers:"
+        Me.pnl_color2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnl_color2.Location = New System.Drawing.Point(380, 26)
+        Me.pnl_color2.Name = "pnl_color2"
+        Me.pnl_color2.Size = New System.Drawing.Size(70, 53)
+        Me.pnl_color2.TabIndex = 1
+        '
+        'btn_rgb_changecolor2
+        '
+        Me.btn_rgb_changecolor2.Location = New System.Drawing.Point(463, 26)
+        Me.btn_rgb_changecolor2.Name = "btn_rgb_changecolor2"
+        Me.btn_rgb_changecolor2.Size = New System.Drawing.Size(98, 22)
+        Me.btn_rgb_changecolor2.TabIndex = 8
+        Me.btn_rgb_changecolor2.Text = "Change Color"
+        Me.btn_rgb_changecolor2.UseVisualStyleBackColor = True
         '
         'MainForm
         '
@@ -605,6 +658,8 @@ Partial Class MainForm
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.tp_rgbleds.ResumeLayout(False)
+        Me.tp_rgbleds.PerformLayout()
+        CType(Me.num_LEDNumber, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_switches.ResumeLayout(False)
         Me.tp_switches.PerformLayout()
         CType(Me.dg_switches_switchlist, System.ComponentModel.ISupportInitialize).EndInit()
@@ -665,4 +720,9 @@ Partial Class MainForm
     Friend WithEvents Attribute As ColumnHeader
     Friend WithEvents Value As ColumnHeader
     Friend WithEvents Label1 As Label
+    Friend WithEvents btn_SetLED As System.Windows.Forms.Button
+    Friend WithEvents num_LEDNumber As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents btn_rgb_changecolor2 As System.Windows.Forms.Button
+    Friend WithEvents pnl_color2 As System.Windows.Forms.Panel
 End Class

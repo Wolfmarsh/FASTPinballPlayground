@@ -15,6 +15,10 @@ Public Class FASTRGBPort
         End Get
     End Property
 
+    Public Sub SetRGBLED(ByVal LEDNumber As Integer, ByVal Color As System.Drawing.Color)
+        SendRawMessage("RS:" & LEDNumber.ToString("x2") & Color.R.ToString("x2") & Color.G.ToString("x2") & Color.B.ToString("x2"), False)
+    End Sub
+
     Public Sub SetAllRGBLEDs(ByVal Color As System.Drawing.Color)
         SendRawMessage("RA:" & Color.R.ToString("x2") & Color.G.ToString("x2") & Color.B.ToString("x2"), False)
     End Sub
