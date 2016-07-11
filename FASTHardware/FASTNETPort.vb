@@ -14,12 +14,15 @@
     Public Property Switches As List(Of FASTSwitch)
     Public Property Drivers As List(Of FASTDriver)
 
+    Public Property UseHexValuesForSwitches As Boolean
+
     Public Sub New()
         MyBase.New()
 
         _Nodes = New List(Of FASTNode)
         _Switches = New List(Of FASTSwitch)
         _Drivers = New List(Of FASTDriver)
+        UseHexValuesForSwitches = True
     End Sub
 
     Public Sub DiscoverNodes()
@@ -82,8 +85,8 @@
     Public Overrides Sub ProcessMessage(LineToProcess As String)
         Try
             Dim _LineParts() As String = LineToProcess.Split(":")
-            'Dim _SwitchNumber As Integer = Convert.ToInt32(_LineParts(1), 16)
-            Dim _SwitchNumber As Integer = _LineParts(1)
+            Dim _SwitchNumber As Integer = Convert.ToInt32(_LineParts(1), 16)
+            'Dim _SwitchNumber As Integer = _LineParts(1)
             Select Case _LineParts(0)
                 Case "-N"
                     _Switches.Item(Convert.ToInt32(_LineParts(1), 16)).Closed = True
