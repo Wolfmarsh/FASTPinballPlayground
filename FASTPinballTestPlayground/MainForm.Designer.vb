@@ -56,6 +56,8 @@ Partial Class MainForm
         Me.lbl_Terminal_CMD = New System.Windows.Forms.Label()
         Me.txt_terminal_command = New System.Windows.Forms.TextBox()
         Me.tp_rgbleds = New System.Windows.Forms.TabPage()
+        Me.btn_rgb_changecolor2 = New System.Windows.Forms.Button()
+        Me.pnl_color2 = New System.Windows.Forms.Panel()
         Me.btn_SetLED = New System.Windows.Forms.Button()
         Me.num_LEDNumber = New System.Windows.Forms.NumericUpDown()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -78,8 +80,8 @@ Partial Class MainForm
         Me.Value = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btn_ExecuteDriver = New System.Windows.Forms.Button()
         Me.lst_Drivers = New System.Windows.Forms.ListBox()
-        Me.pnl_color2 = New System.Windows.Forms.Panel()
-        Me.btn_rgb_changecolor2 = New System.Windows.Forms.Button()
+        Me.cb_terminal_includecr = New System.Windows.Forms.CheckBox()
+        Me.lbl_scanning = New System.Windows.Forms.Label()
         Me.tc_areas.SuspendLayout()
         Me.tp_hardware.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -297,6 +299,7 @@ Partial Class MainForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lbl_scanning)
         Me.GroupBox1.Controls.Add(Me.btn_port_autoconfig)
         Me.GroupBox1.Location = New System.Drawing.Point(15, 15)
         Me.GroupBox1.Name = "GroupBox1"
@@ -326,6 +329,7 @@ Partial Class MainForm
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.cb_terminal_includecr)
         Me.GroupBox4.Controls.Add(Me.lbl_Terminal_CPU)
         Me.GroupBox4.Controls.Add(Me.cb_terminal_port)
         Me.GroupBox4.Controls.Add(Me.Label2)
@@ -420,6 +424,23 @@ Partial Class MainForm
         Me.tp_rgbleds.TabIndex = 0
         Me.tp_rgbleds.Text = "RGB LEDs"
         Me.tp_rgbleds.UseVisualStyleBackColor = True
+        '
+        'btn_rgb_changecolor2
+        '
+        Me.btn_rgb_changecolor2.Location = New System.Drawing.Point(463, 26)
+        Me.btn_rgb_changecolor2.Name = "btn_rgb_changecolor2"
+        Me.btn_rgb_changecolor2.Size = New System.Drawing.Size(98, 22)
+        Me.btn_rgb_changecolor2.TabIndex = 8
+        Me.btn_rgb_changecolor2.Text = "Change Color"
+        Me.btn_rgb_changecolor2.UseVisualStyleBackColor = True
+        '
+        'pnl_color2
+        '
+        Me.pnl_color2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnl_color2.Location = New System.Drawing.Point(380, 26)
+        Me.pnl_color2.Name = "pnl_color2"
+        Me.pnl_color2.Size = New System.Drawing.Size(70, 53)
+        Me.pnl_color2.TabIndex = 1
         '
         'btn_SetLED
         '
@@ -621,22 +642,27 @@ Partial Class MainForm
         Me.lst_Drivers.Size = New System.Drawing.Size(205, 433)
         Me.lst_Drivers.TabIndex = 0
         '
-        'pnl_color2
+        'cb_terminal_includecr
         '
-        Me.pnl_color2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnl_color2.Location = New System.Drawing.Point(380, 26)
-        Me.pnl_color2.Name = "pnl_color2"
-        Me.pnl_color2.Size = New System.Drawing.Size(70, 53)
-        Me.pnl_color2.TabIndex = 1
+        Me.cb_terminal_includecr.AutoSize = True
+        Me.cb_terminal_includecr.Checked = True
+        Me.cb_terminal_includecr.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cb_terminal_includecr.Location = New System.Drawing.Point(384, 37)
+        Me.cb_terminal_includecr.Name = "cb_terminal_includecr"
+        Me.cb_terminal_includecr.Size = New System.Drawing.Size(79, 17)
+        Me.cb_terminal_includecr.TabIndex = 6
+        Me.cb_terminal_includecr.Text = "Include CR"
+        Me.cb_terminal_includecr.UseVisualStyleBackColor = True
         '
-        'btn_rgb_changecolor2
+        'lbl_scanning
         '
-        Me.btn_rgb_changecolor2.Location = New System.Drawing.Point(463, 26)
-        Me.btn_rgb_changecolor2.Name = "btn_rgb_changecolor2"
-        Me.btn_rgb_changecolor2.Size = New System.Drawing.Size(98, 22)
-        Me.btn_rgb_changecolor2.TabIndex = 8
-        Me.btn_rgb_changecolor2.Text = "Change Color"
-        Me.btn_rgb_changecolor2.UseVisualStyleBackColor = True
+        Me.lbl_scanning.AutoSize = True
+        Me.lbl_scanning.Location = New System.Drawing.Point(224, 37)
+        Me.lbl_scanning.Name = "lbl_scanning"
+        Me.lbl_scanning.Size = New System.Drawing.Size(127, 13)
+        Me.lbl_scanning.TabIndex = 5
+        Me.lbl_scanning.Text = "Please Wait, Scanning...."
+        Me.lbl_scanning.Visible = False
         '
         'MainForm
         '
@@ -654,6 +680,7 @@ Partial Class MainForm
         CType(Me.dg_hardware_nodes, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dg_hardware_ports, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.tp_terminal.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
@@ -725,4 +752,6 @@ Partial Class MainForm
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btn_rgb_changecolor2 As System.Windows.Forms.Button
     Friend WithEvents pnl_color2 As System.Windows.Forms.Panel
+    Friend WithEvents cb_terminal_includecr As CheckBox
+    Friend WithEvents lbl_scanning As Label
 End Class

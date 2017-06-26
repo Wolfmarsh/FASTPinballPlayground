@@ -121,7 +121,7 @@ Public Class FASTHardware
                     MsgBox(_ReturnValue.ToString(), MsgBoxStyle.MsgBoxRight, "Unknown CPU Detected")
                 End If
             Catch ex As Exception
-                If ex.HResult <> TimeoutError Then
+                If (ex.HResult <> TimeoutError) And (Not ex.Message.StartsWith("The parameter is incorrect.")) Then
                     MsgBox(ex.Message, vbOKOnly, "Error")
                 End If
             Finally

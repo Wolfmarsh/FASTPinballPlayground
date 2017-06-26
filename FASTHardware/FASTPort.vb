@@ -88,14 +88,18 @@ Public MustInherit Class FASTPort
     End Sub
 
 
-    Public Function SendRawMessage(ByVal Message As String, Optional ByVal ReadAnything As Boolean = True) As String
+    Public Function SendRawMessage(ByVal Message As String, Optional ByVal ReadAnything As Boolean = True, Optional ByVal IncludeCR As Boolean = True) As String
         Dim _ReturnValue As New StringBuilder
 
         If Not _Port.IsOpen Then
             _Port.Open()
         End If
 
-        _Port.Write(Message & vbCr)
+        If IncludeCR Then
+            _Port.Write(Message & vbCr)
+        Else
+            _Port.Write(Message)
+        End If
 
         If ReadAnything Then
             For _TimeoutCounter As Integer = 0 To 5

@@ -11,9 +11,16 @@ Public Class MainForm
 
     Private Sub btn_port_autoconfig_Click(sender As Object, e As EventArgs) Handles btn_port_autoconfig.Click
         Try
+            btn_port_autoconfig.Enabled = False
+            lbl_scanning.Visible = True
             _FAST.AutoConfigurePorts()
             DisplayHardwareControls(True)
+            lbl_scanning.Visible = False
+            btn_port_autoconfig.Enabled = True
+            MsgBox("Complete", MsgBoxStyle.OkOnly, "Scan Complete")
         Catch ex As Exception
+            lbl_scanning.Visible = False
+            btn_port_autoconfig.Enabled = True
             If ex.Message = "No Serial Ports Found On This Computer" Then
                 MsgBox("No Serial Ports Were Found On This Computer", MsgBoxStyle.OkOnly, "No Ports Found")
                 Exit Sub
@@ -92,7 +99,7 @@ Public Class MainForm
     End Sub
 
     Private Sub btn_terminal_sendcustom_Click(sender As Object, e As EventArgs) Handles btn_terminal_sendcustom.Click
-        SendTerminalCommand(txt_terminal_command.Text)
+        SendTerminalCommand(txt_terminal_command.Text, cb_terminal_includecr.Checked)
     End Sub
 
     Private Sub tc_areas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tc_areas.SelectedIndexChanged
@@ -146,13 +153,13 @@ Public Class MainForm
 
     Private Sub txt_terminal_command_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt_terminal_command.KeyPress
         If e.KeyChar = vbCr Then
-            SendTerminalCommand(txt_terminal_command.Text)
+            SendTerminalCommand(txt_terminal_command.Text, cb_terminal_includecr.Checked)
         End If
     End Sub
 
-    Private Sub SendTerminalCommand(terminalCommand As String)
+    Private Sub SendTerminalCommand(terminalCommand As String, Optional IncludeCR As Boolean = True)
         If _FAST.HasNET Then
-            Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage(terminalCommand)
+            Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage(terminalCommand, IncludeCR:=IncludeCR)
             txt_terminal_console.Text = _Return.Replace(vbCr, vbCrLf)
         End If
     End Sub
@@ -182,7 +189,8 @@ Public Class MainForm
     End Sub
 
     Private Sub btn_ExecuteDriver_Click(sender As Object, e As EventArgs) Handles btn_ExecuteDriver.Click
-        SendTerminalCommand(lst_Drivers.Text() & ",01,00,10,14,FF,00,00,50")
+        'DN:04,89,00,10,10,AA,50
+        SendTerminalCommand(lst_Drivers.Text() & ",89,00,10,10,AA,50")
     End Sub
 
     Private Sub btn_SetLED_Click(sender As Object, e As EventArgs) Handles btn_SetLED.Click
