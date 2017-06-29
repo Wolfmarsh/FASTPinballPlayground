@@ -45,9 +45,11 @@ Partial Class MainForm
         Me.dg_hardware_comports_version = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lbl_scanning = New System.Windows.Forms.Label()
         Me.btn_port_autoconfig = New System.Windows.Forms.Button()
         Me.tp_terminal = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.cb_terminal_includecr = New System.Windows.Forms.CheckBox()
         Me.lbl_Terminal_CPU = New System.Windows.Forms.Label()
         Me.cb_terminal_port = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -74,14 +76,16 @@ Partial Class MainForm
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txt_switches_activity = New System.Windows.Forms.TextBox()
         Me.tp_drivers = New System.Windows.Forms.TabPage()
+        Me.cb_pulse_pwm = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.num_pulse_ms = New System.Windows.Forms.NumericUpDown()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lv_DriverInformation = New System.Windows.Forms.ListView()
         Me.Attribute = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Value = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btn_ExecuteDriver = New System.Windows.Forms.Button()
         Me.lst_Drivers = New System.Windows.Forms.ListBox()
-        Me.cb_terminal_includecr = New System.Windows.Forms.CheckBox()
-        Me.lbl_scanning = New System.Windows.Forms.Label()
         Me.tc_areas.SuspendLayout()
         Me.tp_hardware.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -95,6 +99,7 @@ Partial Class MainForm
         Me.tp_switches.SuspendLayout()
         CType(Me.dg_switches_switchlist, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_drivers.SuspendLayout()
+        CType(Me.num_pulse_ms, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tc_areas
@@ -308,6 +313,16 @@ Partial Class MainForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Step 1: Find FAST Hardware"
         '
+        'lbl_scanning
+        '
+        Me.lbl_scanning.AutoSize = True
+        Me.lbl_scanning.Location = New System.Drawing.Point(224, 37)
+        Me.lbl_scanning.Name = "lbl_scanning"
+        Me.lbl_scanning.Size = New System.Drawing.Size(127, 13)
+        Me.lbl_scanning.TabIndex = 5
+        Me.lbl_scanning.Text = "Please Wait, Scanning...."
+        Me.lbl_scanning.Visible = False
+        '
         'btn_port_autoconfig
         '
         Me.btn_port_autoconfig.Location = New System.Drawing.Point(24, 32)
@@ -343,6 +358,18 @@ Partial Class MainForm
         Me.GroupBox4.TabIndex = 1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Step 2: Communicate"
+        '
+        'cb_terminal_includecr
+        '
+        Me.cb_terminal_includecr.AutoSize = True
+        Me.cb_terminal_includecr.Checked = True
+        Me.cb_terminal_includecr.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cb_terminal_includecr.Location = New System.Drawing.Point(384, 37)
+        Me.cb_terminal_includecr.Name = "cb_terminal_includecr"
+        Me.cb_terminal_includecr.Size = New System.Drawing.Size(79, 17)
+        Me.cb_terminal_includecr.TabIndex = 6
+        Me.cb_terminal_includecr.Text = "Include CR"
+        Me.cb_terminal_includecr.UseVisualStyleBackColor = True
         '
         'lbl_Terminal_CPU
         '
@@ -584,6 +611,10 @@ Partial Class MainForm
         '
         'tp_drivers
         '
+        Me.tp_drivers.Controls.Add(Me.cb_pulse_pwm)
+        Me.tp_drivers.Controls.Add(Me.Label10)
+        Me.tp_drivers.Controls.Add(Me.num_pulse_ms)
+        Me.tp_drivers.Controls.Add(Me.Label9)
         Me.tp_drivers.Controls.Add(Me.Label1)
         Me.tp_drivers.Controls.Add(Me.lv_DriverInformation)
         Me.tp_drivers.Controls.Add(Me.btn_ExecuteDriver)
@@ -594,6 +625,44 @@ Partial Class MainForm
         Me.tp_drivers.TabIndex = 5
         Me.tp_drivers.Text = "Drivers"
         Me.tp_drivers.UseVisualStyleBackColor = True
+        '
+        'cb_pulse_pwm
+        '
+        Me.cb_pulse_pwm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_pulse_pwm.FormattingEnabled = True
+        Me.cb_pulse_pwm.Items.AddRange(New Object() {"12.5", "25", "37.5", "50", "62.5", "75", "87.5", "100"})
+        Me.cb_pulse_pwm.Location = New System.Drawing.Point(291, 484)
+        Me.cb_pulse_pwm.Name = "cb_pulse_pwm"
+        Me.cb_pulse_pwm.Size = New System.Drawing.Size(74, 21)
+        Me.cb_pulse_pwm.TabIndex = 8
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(237, 487)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(48, 13)
+        Me.Label10.TabIndex = 7
+        Me.Label10.Text = "PWM %:"
+        '
+        'num_pulse_ms
+        '
+        Me.num_pulse_ms.Location = New System.Drawing.Point(113, 485)
+        Me.num_pulse_ms.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
+        Me.num_pulse_ms.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.num_pulse_ms.Name = "num_pulse_ms"
+        Me.num_pulse_ms.Size = New System.Drawing.Size(71, 20)
+        Me.num_pulse_ms.TabIndex = 6
+        Me.num_pulse_ms.Value = New Decimal(New Integer() {15, 0, 0, 0})
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(52, 487)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(55, 13)
+        Me.Label9.TabIndex = 5
+        Me.Label9.Text = "Pulse MS:"
         '
         'Label1
         '
@@ -642,28 +711,6 @@ Partial Class MainForm
         Me.lst_Drivers.Size = New System.Drawing.Size(205, 433)
         Me.lst_Drivers.TabIndex = 0
         '
-        'cb_terminal_includecr
-        '
-        Me.cb_terminal_includecr.AutoSize = True
-        Me.cb_terminal_includecr.Checked = True
-        Me.cb_terminal_includecr.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cb_terminal_includecr.Location = New System.Drawing.Point(384, 37)
-        Me.cb_terminal_includecr.Name = "cb_terminal_includecr"
-        Me.cb_terminal_includecr.Size = New System.Drawing.Size(79, 17)
-        Me.cb_terminal_includecr.TabIndex = 6
-        Me.cb_terminal_includecr.Text = "Include CR"
-        Me.cb_terminal_includecr.UseVisualStyleBackColor = True
-        '
-        'lbl_scanning
-        '
-        Me.lbl_scanning.AutoSize = True
-        Me.lbl_scanning.Location = New System.Drawing.Point(224, 37)
-        Me.lbl_scanning.Name = "lbl_scanning"
-        Me.lbl_scanning.Size = New System.Drawing.Size(127, 13)
-        Me.lbl_scanning.TabIndex = 5
-        Me.lbl_scanning.Text = "Please Wait, Scanning...."
-        Me.lbl_scanning.Visible = False
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -692,6 +739,7 @@ Partial Class MainForm
         CType(Me.dg_switches_switchlist, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_drivers.ResumeLayout(False)
         Me.tp_drivers.PerformLayout()
+        CType(Me.num_pulse_ms, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -754,4 +802,8 @@ Partial Class MainForm
     Friend WithEvents pnl_color2 As System.Windows.Forms.Panel
     Friend WithEvents cb_terminal_includecr As CheckBox
     Friend WithEvents lbl_scanning As Label
+    Friend WithEvents cb_pulse_pwm As ComboBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents num_pulse_ms As NumericUpDown
+    Friend WithEvents Label9 As Label
 End Class

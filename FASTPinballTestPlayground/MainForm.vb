@@ -127,6 +127,7 @@ Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.Text = Me.Text & " - " & Application.ProductVersion
         DisplayHardwareControls(False)
+        cb_pulse_pwm.SelectedIndex = 3
     End Sub
 
     Private Sub DisplayHardwareControls(ByVal isHardwareDetected As Boolean)
@@ -189,8 +190,51 @@ Public Class MainForm
     End Sub
 
     Private Sub btn_ExecuteDriver_Click(sender As Object, e As EventArgs) Handles btn_ExecuteDriver.Click
+        'Example from mpf - thanks jan
+        'cmd = '{}{},89,00,10,{},{},00,00,{}'.format(
+        '        self.get_config_cmd(),
+        '        self.number,
+        '        hex_ms_string,
+        '        self.get_pwm_for_cmd(pulse_settings.power),
+        '        self.get_recycle_ms_for_cmd(self.config.default_recycle, pulse_settings.duration)
+        '    )
         'DN:04,89,00,10,10,AA,50
-        SendTerminalCommand(lst_Drivers.Text() & ",89,00,10,10,AA,50")
+        Dim _ms As Integer
+        _ms = num_pulse_ms.Value
+        Dim _mshex As String
+        _mshex = _ms.ToString("X2")
+
+        '12.5
+        '25
+        '37.5
+        '50
+        '62.5
+        '75
+        '87.5
+        '100
+        Dim _pwmhex As String
+        Select Case cb_pulse_pwm.SelectedText
+            Case "12.5"
+                _pwmhex = "01"
+            Case "25"
+                _pwmhex = "88"
+            Case "37.5"
+                _pwmhex = "92"
+            Case "50"
+                _pwmhex = "AA"
+            Case "62.5"
+                _pwmhex = "BA"
+            Case "75"
+                _pwmhex = "EE"
+            Case "87.5"
+                _pwmhex = "FE"
+            Case "100"
+                _pwmhex = "FF"
+            Case Else
+                _pwmhex = "AA"
+        End Select
+
+        SendTerminalCommand(lst_Drivers.Text() & ",89,00,10," & _mshex & "," & _pwmhex & ",50")
     End Sub
 
     Private Sub btn_SetLED_Click(sender As Object, e As EventArgs) Handles btn_SetLED.Click
