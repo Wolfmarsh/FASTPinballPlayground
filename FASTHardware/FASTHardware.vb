@@ -95,6 +95,8 @@ Public Class FASTHardware
                 _TempPort.ReadTimeout = 250
                 _TempPort.NewLine = vbCr
                 _TempPort.Encoding = System.Text.Encoding.UTF8
+                _TempPort.ReadTimeout = 2500
+                _TempPort.WriteTimeout = 2500
                 _TempPort.Write("ID:" & vbCr)
                 Dim _ReturnValue As String = ""
                 'For _CharCount As Integer = 0 To 26

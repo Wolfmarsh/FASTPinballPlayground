@@ -481,6 +481,7 @@ Partial Class MainForm
         'num_LEDNumber
         '
         Me.num_LEDNumber.Location = New System.Drawing.Point(454, 125)
+        Me.num_LEDNumber.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
         Me.num_LEDNumber.Name = "num_LEDNumber"
         Me.num_LEDNumber.Size = New System.Drawing.Size(107, 20)
         Me.num_LEDNumber.TabIndex = 6
