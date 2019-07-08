@@ -49,6 +49,10 @@ Partial Class MainForm
         Me.btn_port_autoconfig = New System.Windows.Forms.Button()
         Me.tp_terminal = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btn_comm_sa = New System.Windows.Forms.Button()
+        Me.btn_comm_cn = New System.Windows.Forms.Button()
+        Me.btn_comm_id = New System.Windows.Forms.Button()
         Me.cb_terminal_includecr = New System.Windows.Forms.CheckBox()
         Me.lbl_Terminal_CPU = New System.Windows.Forms.Label()
         Me.cb_terminal_port = New System.Windows.Forms.ComboBox()
@@ -69,6 +73,9 @@ Partial Class MainForm
         Me.btn_rgb_changecolor = New System.Windows.Forms.Button()
         Me.pnl_color = New System.Windows.Forms.Panel()
         Me.tp_switches = New System.Windows.Forms.TabPage()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.lbl_recent_switch = New System.Windows.Forms.Label()
+        Me.chk_use_tts = New System.Windows.Forms.CheckBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.dg_switches_switchlist = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -86,6 +93,7 @@ Partial Class MainForm
         Me.Value = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btn_ExecuteDriver = New System.Windows.Forms.Button()
         Me.lst_Drivers = New System.Windows.Forms.ListBox()
+        Me.btn_comm_wd0 = New System.Windows.Forms.Button()
         Me.tc_areas.SuspendLayout()
         Me.tp_hardware.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -94,9 +102,11 @@ Partial Class MainForm
         Me.GroupBox1.SuspendLayout()
         Me.tp_terminal.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.tp_rgbleds.SuspendLayout()
         CType(Me.num_LEDNumber, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_switches.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         CType(Me.dg_switches_switchlist, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_drivers.SuspendLayout()
         CType(Me.num_pulse_ms, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -344,6 +354,7 @@ Partial Class MainForm
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.GroupBox3)
         Me.GroupBox4.Controls.Add(Me.cb_terminal_includecr)
         Me.GroupBox4.Controls.Add(Me.lbl_Terminal_CPU)
         Me.GroupBox4.Controls.Add(Me.cb_terminal_port)
@@ -352,12 +363,52 @@ Partial Class MainForm
         Me.GroupBox4.Controls.Add(Me.btn_terminal_sendcustom)
         Me.GroupBox4.Controls.Add(Me.lbl_Terminal_CMD)
         Me.GroupBox4.Controls.Add(Me.txt_terminal_command)
-        Me.GroupBox4.Location = New System.Drawing.Point(15, 61)
+        Me.GroupBox4.Location = New System.Drawing.Point(15, 12)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(657, 461)
+        Me.GroupBox4.Size = New System.Drawing.Size(657, 510)
         Me.GroupBox4.TabIndex = 1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Step 2: Communicate"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.btn_comm_wd0)
+        Me.GroupBox3.Controls.Add(Me.btn_comm_sa)
+        Me.GroupBox3.Controls.Add(Me.btn_comm_cn)
+        Me.GroupBox3.Controls.Add(Me.btn_comm_id)
+        Me.GroupBox3.Location = New System.Drawing.Point(24, 99)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(607, 84)
+        Me.GroupBox3.TabIndex = 7
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Common Commands"
+        '
+        'btn_comm_sa
+        '
+        Me.btn_comm_sa.Location = New System.Drawing.Point(162, 19)
+        Me.btn_comm_sa.Name = "btn_comm_sa"
+        Me.btn_comm_sa.Size = New System.Drawing.Size(140, 23)
+        Me.btn_comm_sa.TabIndex = 2
+        Me.btn_comm_sa.Text = "Switch Data (SA)"
+        Me.btn_comm_sa.UseVisualStyleBackColor = True
+        '
+        'btn_comm_cn
+        '
+        Me.btn_comm_cn.Location = New System.Drawing.Point(16, 48)
+        Me.btn_comm_cn.Name = "btn_comm_cn"
+        Me.btn_comm_cn.Size = New System.Drawing.Size(140, 23)
+        Me.btn_comm_cn.TabIndex = 1
+        Me.btn_comm_cn.Text = "Configured Nodes (CN)"
+        Me.btn_comm_cn.UseVisualStyleBackColor = True
+        '
+        'btn_comm_id
+        '
+        Me.btn_comm_id.Location = New System.Drawing.Point(16, 19)
+        Me.btn_comm_id.Name = "btn_comm_id"
+        Me.btn_comm_id.Size = New System.Drawing.Size(140, 23)
+        Me.btn_comm_id.TabIndex = 0
+        Me.btn_comm_id.Text = "Processor ID (ID)"
+        Me.btn_comm_id.UseVisualStyleBackColor = True
         '
         'cb_terminal_includecr
         '
@@ -392,7 +443,7 @@ Partial Class MainForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(21, 97)
+        Me.Label2.Location = New System.Drawing.Point(21, 186)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(50, 13)
         Me.Label2.TabIndex = 4
@@ -401,11 +452,11 @@ Partial Class MainForm
         'txt_terminal_console
         '
         Me.txt_terminal_console.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_terminal_console.Location = New System.Drawing.Point(24, 113)
+        Me.txt_terminal_console.Location = New System.Drawing.Point(24, 202)
         Me.txt_terminal_console.Multiline = True
         Me.txt_terminal_console.Name = "txt_terminal_console"
         Me.txt_terminal_console.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_terminal_console.Size = New System.Drawing.Size(607, 328)
+        Me.txt_terminal_console.Size = New System.Drawing.Size(607, 287)
         Me.txt_terminal_console.TabIndex = 3
         '
         'btn_terminal_sendcustom
@@ -541,6 +592,8 @@ Partial Class MainForm
         '
         'tp_switches
         '
+        Me.tp_switches.Controls.Add(Me.GroupBox5)
+        Me.tp_switches.Controls.Add(Me.chk_use_tts)
         Me.tp_switches.Controls.Add(Me.Label7)
         Me.tp_switches.Controls.Add(Me.dg_switches_switchlist)
         Me.tp_switches.Controls.Add(Me.Label6)
@@ -551,6 +604,37 @@ Partial Class MainForm
         Me.tp_switches.TabIndex = 3
         Me.tp_switches.Text = "Switches"
         Me.tp_switches.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.lbl_recent_switch)
+        Me.GroupBox5.Location = New System.Drawing.Point(15, 43)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(363, 102)
+        Me.GroupBox5.TabIndex = 9
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Most Recent Activity"
+        '
+        'lbl_recent_switch
+        '
+        Me.lbl_recent_switch.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_recent_switch.Location = New System.Drawing.Point(10, 16)
+        Me.lbl_recent_switch.Name = "lbl_recent_switch"
+        Me.lbl_recent_switch.Size = New System.Drawing.Size(347, 72)
+        Me.lbl_recent_switch.TabIndex = 0
+        Me.lbl_recent_switch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'chk_use_tts
+        '
+        Me.chk_use_tts.AutoSize = True
+        Me.chk_use_tts.Checked = True
+        Me.chk_use_tts.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chk_use_tts.Location = New System.Drawing.Point(15, 20)
+        Me.chk_use_tts.Name = "chk_use_tts"
+        Me.chk_use_tts.Size = New System.Drawing.Size(100, 17)
+        Me.chk_use_tts.TabIndex = 8
+        Me.chk_use_tts.Text = "Use TTS (Beta)"
+        Me.chk_use_tts.UseVisualStyleBackColor = True
         '
         'Label7
         '
@@ -595,7 +679,7 @@ Partial Class MainForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(12, 20)
+        Me.Label6.Location = New System.Drawing.Point(12, 161)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(77, 13)
         Me.Label6.TabIndex = 1
@@ -603,11 +687,12 @@ Partial Class MainForm
         '
         'txt_switches_activity
         '
-        Me.txt_switches_activity.Location = New System.Drawing.Point(15, 36)
+        Me.txt_switches_activity.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_switches_activity.Location = New System.Drawing.Point(15, 177)
         Me.txt_switches_activity.Multiline = True
         Me.txt_switches_activity.Name = "txt_switches_activity"
         Me.txt_switches_activity.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_switches_activity.Size = New System.Drawing.Size(363, 471)
+        Me.txt_switches_activity.Size = New System.Drawing.Size(363, 330)
         Me.txt_switches_activity.TabIndex = 0
         '
         'tp_drivers
@@ -712,6 +797,15 @@ Partial Class MainForm
         Me.lst_Drivers.Size = New System.Drawing.Size(205, 433)
         Me.lst_Drivers.TabIndex = 0
         '
+        'btn_comm_wd0
+        '
+        Me.btn_comm_wd0.Location = New System.Drawing.Point(162, 48)
+        Me.btn_comm_wd0.Name = "btn_comm_wd0"
+        Me.btn_comm_wd0.Size = New System.Drawing.Size(140, 23)
+        Me.btn_comm_wd0.TabIndex = 3
+        Me.btn_comm_wd0.Text = "Disable Watchdog (WD:0)"
+        Me.btn_comm_wd0.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -732,11 +826,13 @@ Partial Class MainForm
         Me.tp_terminal.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
         Me.tp_rgbleds.ResumeLayout(False)
         Me.tp_rgbleds.PerformLayout()
         CType(Me.num_LEDNumber, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_switches.ResumeLayout(False)
         Me.tp_switches.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
         CType(Me.dg_switches_switchlist, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_drivers.ResumeLayout(False)
         Me.tp_drivers.PerformLayout()
@@ -807,4 +903,12 @@ Partial Class MainForm
     Friend WithEvents Label10 As Label
     Friend WithEvents num_pulse_ms As NumericUpDown
     Friend WithEvents Label9 As Label
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents btn_comm_cn As Button
+    Friend WithEvents btn_comm_id As Button
+    Friend WithEvents btn_comm_sa As Button
+    Friend WithEvents chk_use_tts As CheckBox
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents lbl_recent_switch As Label
+    Friend WithEvents btn_comm_wd0 As Button
 End Class

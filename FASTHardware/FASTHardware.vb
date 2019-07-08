@@ -92,11 +92,10 @@ Public Class FASTHardware
         For Each _Port As String In My.Computer.Ports.SerialPortNames
             Try
                 _TempPort = My.Computer.Ports.OpenSerialPort(_Port, 921600)
-                _TempPort.ReadTimeout = 250
+                _TempPort.ReadTimeout = 500
                 _TempPort.NewLine = vbCr
                 _TempPort.Encoding = System.Text.Encoding.UTF8
-                _TempPort.ReadTimeout = 2500
-                _TempPort.WriteTimeout = 2500
+                _TempPort.WriteTimeout = 500
                 _TempPort.Write("ID:" & vbCr)
                 Dim _ReturnValue As String = ""
                 'For _CharCount As Integer = 0 To 26
@@ -123,7 +122,7 @@ Public Class FASTHardware
                     MsgBox(_ReturnValue.ToString(), MsgBoxStyle.MsgBoxRight, "Unknown CPU Detected")
                 End If
             Catch ex As Exception
-                If (ex.HResult <> TimeoutError) And (Not ex.Message.StartsWith("The parameter is incorrect.")) Then
+                If (ex.HResult <> TimeoutError) And (Not ex.Message.StartsWith("The parameter is incorrect.")) And (Not ex.Message.StartsWith("The semaphore")) Then
                     MsgBox(ex.Message, vbOKOnly, "Error")
                 End If
             Finally

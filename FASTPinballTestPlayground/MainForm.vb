@@ -9,6 +9,9 @@ Public Class MainForm
     Delegate Sub MyGUIUpdateDelegate(ByVal Message As String)
     Public _myGUIUpdateDelegate As MyGUIUpdateDelegate
 
+    Private _Speech As System.Speech.Synthesis.SpeechSynthesizer
+    Private _SwitchList As List(Of String)
+
     Private Sub btn_port_autoconfig_Click(sender As Object, e As EventArgs) Handles btn_port_autoconfig.Click
         Try
             btn_port_autoconfig.Enabled = False
@@ -58,11 +61,25 @@ Public Class MainForm
             Me.Invoke(_myGUIUpdateDelegate)
         Else
             If tc_areas.SelectedTab.Text = "Switches" Then
-                txt_switches_activity.AppendText(GetTimeStamp() & ": " & sender.DisplayName & " " & IIf(sender.Closed, "Closed", "Opened") & vbCrLf)
+                txt_switches_activity.Text = GetTimeStamp() & ": " & sender.DisplayName & " " & IIf(sender.Closed, "Closed", "Opened") & vbCrLf & txt_switches_activity.Text
+                If (txt_switches_activity.Text.Length > 500) Then
+                    txt_switches_activity.Text = txt_switches_activity.Text.Substring(0, txt_switches_activity.Text.LastIndexOf(vbCrLf, txt_switches_activity.Text.LastIndexOf(vbCrLf) - 1))
+                End If
+
                 If sender.Closed Then
-                    My.Computer.Audio.Play(My.Resources.switchbeepon, AudioPlayMode.Background)
+                    lbl_recent_switch.Text = sender.DisplayName & " CLOSED"
+                    If chk_use_tts.Checked Then
+                        _Speech.SpeakAsync(sender.DisplayName & " CLOSED")
+                    Else
+                        My.Computer.Audio.Play(My.Resources.switchbeepon, AudioPlayMode.Background)
+                    End If
                 Else
-                    My.Computer.Audio.Play(My.Resources.switchbeepoff, AudioPlayMode.Background)
+                    lbl_recent_switch.Text = sender.DisplayName & " OPEN"
+                    If chk_use_tts.Checked Then
+                        _Speech.SpeakAsync(sender.DisplayName & " OPEN")
+                    Else
+                        My.Computer.Audio.Play(My.Resources.switchbeepoff, AudioPlayMode.Background)
+                    End If
                 End If
                 dg_switches_switchlist.Refresh()
             End If
@@ -70,7 +87,7 @@ Public Class MainForm
     End Sub
 
     Private Function GetTimeStamp() As String
-        Return DateTime.Now.ToString("HH:mm:ss.fffffff")
+        Return DateTime.Now.ToString("HH:mm:ss.ff")
     End Function
 
     Private Sub _FAST_HardwareChanged() Handles _FAST.HardwareChanged
@@ -128,6 +145,9 @@ Public Class MainForm
         Me.Text = Me.Text & " - " & Application.ProductVersion
         DisplayHardwareControls(False)
         cb_pulse_pwm.SelectedIndex = 3
+
+        _Speech = New System.Speech.Synthesis.SpeechSynthesizer()
+        _Speech.SetOutputToDefaultAudioDevice()
     End Sub
 
     Private Sub DisplayHardwareControls(ByVal isHardwareDetected As Boolean)
@@ -248,5 +268,33 @@ Public Class MainForm
         _ColorForm.Color = pnl_color2.BackColor
         _ColorForm.ShowDialog()
         pnl_color2.BackColor = _ColorForm.Color
+    End Sub
+
+    Private Sub btn_comm_id_Click(sender As Object, e As EventArgs) Handles btn_comm_id.Click
+        If _FAST.HasNET Then
+            Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage("ID:", True)
+            txt_terminal_console.Text = _Return.Replace(vbCr, vbCrLf)
+        End If
+    End Sub
+
+    Private Sub btn_comm_cn_Click(sender As Object, e As EventArgs) Handles btn_comm_cn.Click
+        If _FAST.HasNET Then
+            Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage("CN:", True)
+            txt_terminal_console.Text = _Return.Replace(vbCr, vbCrLf)
+        End If
+    End Sub
+
+    Private Sub btn_comm_sa_Click(sender As Object, e As EventArgs) Handles btn_comm_sa.Click
+        If _FAST.HasNET Then
+            Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage("SA:", True)
+            txt_terminal_console.Text = _Return.Replace(vbCr, vbCrLf)
+        End If
+    End Sub
+
+    Private Sub btn_comm_wd0_Click(sender As Object, e As EventArgs) Handles btn_comm_wd0.Click
+        If _FAST.HasNET Then
+            Dim _Return As String = CType(cb_terminal_port.SelectedItem, FASTPort).SendRawMessage("WD:0", True)
+            txt_terminal_console.Text = _Return.Replace(vbCr, vbCrLf)
+        End If
     End Sub
 End Class

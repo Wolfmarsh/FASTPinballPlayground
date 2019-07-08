@@ -29,7 +29,11 @@
             Catch ex As Exception
                 _SW = _Parts(3)
             End Try
-            _DR = _Parts(4)
+            Try
+                _DR = Convert.ToInt32(_Parts(4), 16)
+            Catch ex As Exception
+                _DR = _Parts(4)
+            End Try
             _XI = _Parts(5)
             _XO = _Parts(6)
             _SerialNumber = _Parts(7)
